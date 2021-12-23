@@ -5,6 +5,7 @@ package view;
 
 import java.sql.*;
 import dao.Conexao;
+import javax.swing.JOptionPane;
 
 /**
  * @author Sérgio Felipe Starke
@@ -15,17 +16,41 @@ public class Login extends javax.swing.JFrame {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    public void acessar() {
+// pwdSenha / txtLogin
+        try {
+            ps = conn.prepareStatement(
+                    "select* from usuarios where login= ? and senha= ?;"
+            );
+            ps.setString(1, txtLogin.getText());
+            String senha = new String(pwdSenha.getPassword());
+            ps.setString(2, senha);
+            rs = ps.executeQuery();
+//Condicional de Compatibilidade e Permição de acesso.
+            if (rs.next()) {
+                MainFrame mf = new MainFrame();
+                mf.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Login e ou Senha inválido(s)");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
         conn = Conexao.connection();
 //Distinção da frame quando conexão bem sucedida ou não.       
-        if (conn != null){
-lblStatus.setText("<html>Status da Conexão:<br><strong><font color= green>"
-+ "Bem Sucedida...</strong><br>Preencha os campos<br>e confirme no botão ao lado</html>");
-btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.png")));
-        }else{
-            
+        if (conn != null) {
+            lblStatus.setText("<html>Status da Conexão:<br><strong><font color= green>"
+                    + "Bem Sucedida...</strong><br>Preencha os campos<br>e confirme no botão ao lado</html>");
+            btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.png")));
+        } else {
+            lblStatus.setText("<html>Status da Conexão:<br><strong><font color= red>"
+                    + "Indisponível</strong>.</html>");
+            btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Fail.png")));
         }
     }
 
@@ -35,15 +60,16 @@ btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.p
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtLogin = new javax.swing.JTextField();
         pwdSenha = new javax.swing.JPasswordField();
         btnOk = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fixed Assistência. Login");
         setResizable(false);
 
-        jLabel1.setText("Usuário");
+        jLabel1.setText("Login");
 
         jLabel2.setText("Senha");
 
@@ -76,7 +102,7 @@ btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.p
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pwdSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))))
+                            .addComponent(txtLogin))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,7 +111,7 @@ btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.p
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -96,11 +122,12 @@ btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.p
                     .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pack();
+        setBounds(0, 0, 301, 231);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
+        acessar();
+
     }//GEN-LAST:event_btnOkActionPerformed
 
     /**
@@ -145,6 +172,6 @@ btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.p
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JPasswordField pwdSenha;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtLogin;
     // End of variables declaration//GEN-END:variables
 }

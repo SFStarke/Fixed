@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Conexao {
 
     public static Connection connection() {
-        java.sql.Connection connect;
+        Connection connect;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(
