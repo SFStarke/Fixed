@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
     ResultSet rs = null;
 
     public void acessar() {
-// pwdSenha / txtLogin
+
         try {
             ps = conn.prepareStatement(
                     "select* from usuarios where login= ? and senha= ?;"
@@ -28,8 +28,10 @@ public class Login extends javax.swing.JFrame {
             rs = ps.executeQuery();
 //Condicional de Compatibilidade e Permição de acesso.
             if (rs.next()) {
-                MainFrame mf = new MainFrame();
+                MainFrame mf = new MainFrame();//Torna JFrame"MainFrame" visivel.
                 mf.setVisible(true);
+                this.dispose();//Torna Frame do Login indisponível após confirmação.
+                conn.close();//Encerrar conexão com database.
             } else {
                 JOptionPane.showMessageDialog(null, "Login e ou Senha inválido(s)");
             }
@@ -73,6 +75,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
+        btnOk.setToolTipText("Confirme após preenchimento dos campos");
+        btnOk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
