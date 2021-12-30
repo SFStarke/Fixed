@@ -17,6 +17,7 @@ public class Login extends javax.swing.JFrame {
     ResultSet rs = null;
 
     public void acessar() {
+        MainFrame mf = new MainFrame();//Torna JFrame"MainFrame" visivel.
 
         try {
             ps = conn.prepareStatement(
@@ -28,8 +29,23 @@ public class Login extends javax.swing.JFrame {
             rs = ps.executeQuery();
 //Condicional de Compatibilidade e Permição de acesso.
             if (rs.next()) {
-                MainFrame mf = new MainFrame();//Torna JFrame"MainFrame" visivel.
-                mf.setVisible(true);
+                String acesso = rs.getString(6);
+//Condicional [livre ou restrito] Consulta D.B/fixed/usuarios/acesso...
+                if (acesso.equals("livre")) {
+                    mf.setVisible(true);
+                    MainFrame.mniUsuario.setEnabled(true);
+                    MainFrame.mnRelatorio.setEnabled(true);
+                    MainFrame.lblUsuario.setText(
+"<html>Usuário com acesso <strong><font color=green>" + rs.getString("acesso")
++ "</font color>.<br><font size= 5>" + rs.getString("nome") + "</strong></html>"
+                    );
+                } else {
+                    mf.setVisible(true);
+                    MainFrame.lblUsuario.setText(
+"<html>Usuário com acesso <strong><font color=orange>" + rs.getString(6)
++ "</font color>.<br><font size= 5>" + rs.getString(2) + "</strong></html>"
+                    );
+                }
                 this.dispose();//Torna Frame do Login indisponível após confirmação.
                 conn.close();//Encerrar conexão com database.
             } else {
@@ -47,7 +63,7 @@ public class Login extends javax.swing.JFrame {
 //Distinção da frame quando conexão bem sucedida ou não.       
         if (conn != null) {
             lblStatus.setText("<html>Status da Conexão:<br><strong><font color= green>"
-                    + "Bem Sucedida...</strong><br>Preencha os campos<br>e confirme no botão ao lado</html>");
+    + "Bem Sucedida...</strong><br>Preencha os campos<br>e confirme no botão ao lado</html>");
             btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Ok.png")));
         } else {
             lblStatus.setText("<html>Status da Conexão:<br><strong><font color= red>"
@@ -131,7 +147,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         acessar();
-
+        txtLogin.setText("");
+        pwdSenha.setText("");
     }//GEN-LAST:event_btnOkActionPerformed
 
     /**
