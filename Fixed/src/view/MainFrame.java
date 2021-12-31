@@ -18,9 +18,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktop = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
         mnCadastro = new javax.swing.JMenu();
         mniCliente = new javax.swing.JMenuItem();
@@ -41,27 +42,41 @@ public class MainFrame extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jDesktopLayout = new javax.swing.GroupLayout(jDesktop);
         jDesktop.setLayout(jDesktopLayout);
         jDesktopLayout.setHorizontalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1120, Short.MAX_VALUE)
+            .addGap(0, 1114, Short.MAX_VALUE)
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Fixed.png"))); // NOI18N
+        getContentPane().add(jDesktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 662));
 
+        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsuario.setText("Usuário");
+        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 530, 209, 78));
 
         lblData.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblData.setForeground(new java.awt.Color(102, 102, 102));
         lblData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblData.setText("Data");
+        getContentPane().add(lblData, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 620, 148, 34));
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Assistência Técnica de Reparos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 100, 160, -1));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Fixed.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1126, 6, 238, 662));
 
         mnCadastro.setText("Cadastro");
 
@@ -125,42 +140,6 @@ public class MainFrame extends javax.swing.JFrame {
         MenuBar.add(mnOpcoes);
 
         setJMenuBar(MenuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
-                        .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
-                        .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
-        );
 
         setSize(new java.awt.Dimension(1386, 736));
         setLocationRelativeTo(null);
@@ -235,6 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JDesktopPane jDesktop;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblData;
     public static javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu mnAjuda;
