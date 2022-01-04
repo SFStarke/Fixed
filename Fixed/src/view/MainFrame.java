@@ -141,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setJMenuBar(MenuBar);
 
-        setSize(new java.awt.Dimension(1386, 736));
+        setSize(new java.awt.Dimension(1385, 736));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
