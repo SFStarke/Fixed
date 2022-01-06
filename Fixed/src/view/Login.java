@@ -36,14 +36,14 @@ public class Login extends javax.swing.JFrame {
                     MainFrame.mniUsuario.setEnabled(true);
                     MainFrame.mnRelatorio.setEnabled(true);
                     MainFrame.lblUsuario.setText(
-"<html>Usuário com acesso <strong><font color=green>" + rs.getString("acesso")
-+ "</font color>.<br><font size= 5>" + rs.getString("nome") + "</strong></html>"
+"<html><font size=5><font color=green>"+rs.getString("nome")+"</font color></font size><br>"+
+"Usuário com acesso <strong><font color=green>" + rs.getString(6)+"</font color>.</html>"
                     );
                 } else {
                     mf.setVisible(true);
                     MainFrame.lblUsuario.setText(
-"<html>Usuário com acesso <strong><font color=orange>" + rs.getString(6)
-+ "</font color>.<br><font size= 5>" + rs.getString(2) + "</strong></html>"
+"<html><font size=5><font color=orange>"+rs.getString(2)+"</font color></font size>.<br>"+
+   "Usuário com acesso <strong><font color=orange>" + rs.getString(6)+"</font color>.</html>"
                     );
                 }
                 this.dispose();//Torna Frame do Login indisponível após confirmação.
