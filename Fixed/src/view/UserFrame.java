@@ -185,7 +185,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Usuários");
         setToolTipText("");
-        setPreferredSize(new java.awt.Dimension(911, 519));
+        setPreferredSize(new java.awt.Dimension(792, 452));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

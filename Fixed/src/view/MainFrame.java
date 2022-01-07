@@ -79,9 +79,19 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1126, 6, 238, 662));
 
         mnCadastro.setText("Cadastro");
+        mnCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastroActionPerformed(evt);
+            }
+        });
 
         mniCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         mniCliente.setText("Clientes");
+        mniCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniClienteActionPerformed(evt);
+            }
+        });
         mnCadastro.add(mniCliente);
 
         mniOs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
@@ -146,6 +156,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
+//Sintaxe de abertura da InternalFrema correspondente para jDesktop.        
         UserFrame uf = new UserFrame();
         uf.setVisible(true);
         jDesktop.add(uf);
@@ -161,9 +172,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void mniSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSairActionPerformed
 //Método que exibe confirmação para encerramento"Fechar" o Sistema.        
         int sair = JOptionPane.showConfirmDialog(
-    null, "Tem certeza que deseja sair?", "ATENÇÃO", JOptionPane.YES_NO_OPTION
+                null, "Tem certeza que deseja sair?", "ATENÇÃO", JOptionPane.YES_NO_OPTION
         );
-        
+
         if (sair == JOptionPane.YES_OPTION) {
             System.exit(sair);
         }
@@ -174,6 +185,18 @@ public class MainFrame extends javax.swing.JFrame {
         Sobre sobre = new Sobre();
         sobre.setVisible(true);
     }//GEN-LAST:event_mniSobreActionPerformed
+
+    private void mnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroActionPerformed
+
+
+    }//GEN-LAST:event_mnCadastroActionPerformed
+
+    private void mniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniClienteActionPerformed
+//Sintaxe de abertura da InternalFrema correspondente para jDesktop.
+        ClienteFrame cf = new ClienteFrame();
+        cf.setVisible(true);
+        jDesktop.add(cf);
+    }//GEN-LAST:event_mniClienteActionPerformed
 
     /**
      * @param args the command line arguments
