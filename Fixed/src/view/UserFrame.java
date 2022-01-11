@@ -42,7 +42,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
     }
 
 //Método para introduzir nº ID em campo"txtId" de usuário selecionado em jTable.
-    private void setId() {
+    private void setTxtId() {
         int spot = jTable.getSelectedRow();
         txtId.setText(jTable.getModel().getValueAt(spot, 0).toString());
     }
@@ -99,7 +99,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
                 ps.executeUpdate();
                 clean();
                 showTable();
-                JOptionPane.showMessageDialog(null, "Usuário Cadastrado.");
+                JOptionPane.showMessageDialog(null, "Usuário(a) Cadastrado(a).");
             }
 
         } catch (SQLException e) {
@@ -425,7 +425,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        setId();
+        setTxtId();
         read();
         btnCreate.setEnabled(false);
 
