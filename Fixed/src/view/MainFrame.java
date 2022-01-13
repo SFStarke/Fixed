@@ -96,6 +96,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         mniOs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
         mniOs.setText("OS");
+        mniOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniOsActionPerformed(evt);
+            }
+        });
         mnCadastro.add(mniOs);
 
         mniUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
@@ -197,6 +202,13 @@ public class MainFrame extends javax.swing.JFrame {
         cf.setVisible(true);
         jDesktop.add(cf);
     }//GEN-LAST:event_mniClienteActionPerformed
+
+    private void mniOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniOsActionPerformed
+//Sintaxe de abertura da InternalFrema correspondente para jDesktop.
+        OsFrame os = new OsFrame();
+        os.setVisible(true);
+        jDesktop.add(os);
+    }//GEN-LAST:event_mniOsActionPerformed
 
     /**
      * @param args the command line arguments
