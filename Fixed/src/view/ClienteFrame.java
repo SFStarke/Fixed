@@ -23,7 +23,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
         search();
     }
     
-    private void search(){
+    private void search(){//Método de pesquisa objetiva. "pelo nome".
         try {
             ps = conn.prepareStatement(
       "select id as ID, nome as Nome, logradouro as Logradouro,fone as Fone,"
@@ -32,7 +32,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
             ps.setString(1, txtNome.getText()+"%");
             rs = ps.executeQuery();
             
-        ((DefaultTableModel)jTable.getModel()).setRowCount(0);    //Limpa jTable
+        ((DefaultTableModel)jTable.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
        //Apresenta conteudo de pesquisa em jTable
        while(rs.next()){             
            table.insertRow(table.getRowCount(), new Object[]{rs.getString(1),
