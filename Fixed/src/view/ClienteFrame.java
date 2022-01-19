@@ -156,6 +156,7 @@ btnCreate.setEnabled(false);//Inabilita função de btnCreate.
         setForeground(new java.awt.Color(0, 0, 204));
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Cliente");
         setPreferredSize(new java.awt.Dimension(792, 452));
 
         jTable = new javax.swing.JTable(){
