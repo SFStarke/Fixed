@@ -26,6 +26,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
     }
 
     private void clean() {
+        txtNomeCliente.setEditable(true);
         txtNomeCliente.setText(null);
         txtIdCliente.setText(null);
         txtEquipamento.setText(null);
@@ -35,16 +36,21 @@ public class OsFrame extends javax.swing.JInternalFrame {
         txtValor.setText("0.00");
         cbStatus.setSelectedIndex(0);//Reestabelece primeiro item. "jComboBox"
         ((DefaultTableModel) jTabCli.getModel()).setRowCount(0);//Limpa jTable.
+        jTabCli.setVisible(true);
+        txtOs.setText(null);
+        txtData.setText(null);
+        rbOrcamento.setSelected(true);
+        btnCreate.setEnabled(true);
     }
 
     private void link() {
         try {
             ps = conn.prepareStatement(
-                    "select o.id, c.nome from ordemservico o join clientes c on o.idcliente = c.id order by id;"
+"select o.id, c.nome from ordemservico o join clientes c on o.idcliente = c.id order by id;"
             );
             rs = ps.executeQuery();
             while (rs.next()) {
-                this.linkos += "\n OS nº: " + rs.getString(1) + ". Cliente: " + rs.getString(2) + ".";
+this.linkos += "\n OS nº: " + rs.getString(1) + ". Cliente: " + rs.getString(2) + ".";
             }
             JOptionPane.showMessageDialog(null, linkos);
             this.linkos = "";
@@ -56,14 +62,16 @@ public class OsFrame extends javax.swing.JInternalFrame {
     private void searchcli() {//Método de pesquisa objetiva. "pelo nome".
         try {
             ps = conn.prepareStatement(
-                    "select id as ID, nome as Nome, fone as Fone from clientes where nome like ?"
+"select id as ID, nome as Nome, fone as Fone from clientes where nome like ?"
             );
             ps.setString(1, txtNomeCliente.getText() + "%");
             rs = ps.executeQuery();
-            ((DefaultTableModel) jTabCli.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
+((DefaultTableModel) jTabCli.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
             //Apresenta conteudo de pesquisa em jTable
             while (rs.next()) {
-                tabcli.insertRow(tabcli.getRowCount(), new Object[]{rs.getString("id"), rs.getString("nome"), rs.getString("fone")});
+                  tabcli.insertRow(tabcli.getRowCount(), new Object[]{
+           rs.getString("id"), rs.getString("nome"), rs.getString("fone")
+                  });
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao listar Cliente.\n" + e);
@@ -89,7 +97,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
             ps.setString(7, txtValor.getText().replace(",", "."));//"replace" faz permitir, tanto o ponto como a virgula, no txtValor.
             ps.setString(8, txtIdCliente.getText());
             if ((txtIdCliente.getText().isEmpty()) || (txtEquipamento.getText().isEmpty())
-                    || (txtDefeito.getText().isEmpty()) || ("*Selecione Status" == cbStatus.getSelectedItem())) {
+|| (txtDefeito.getText().isEmpty()) || ("*Selecione Status" == cbStatus.getSelectedItem())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
             } else {
                 ps.executeUpdate();
@@ -159,18 +167,34 @@ public class OsFrame extends javax.swing.JInternalFrame {
             } else {
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null,
-                        "Ordem de Serviço nº '" + txtOs.getText() + "' atualizado."
+                        "Ordem de Serviço nº " + txtOs.getText() + " atualizado.>"
                 );
                 clean();
-                txtOs.setText(null);
-                txtData.setText(null);
-                rbOrcamento.setSelected(true);
-                btnCreate.setEnabled(true);
-                txtNomeCliente.setEditable(true);
-                jTabCli.setVisible(true);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro em atualização\n." + e);
+        }
+    }
+
+    private void delete() {
+//Condicional questionativo de confirmação.
+        int confirm = JOptionPane.showConfirmDialog(null,
+"<html>Tem cesteza que deseja excluir?<br><font size=5>O.S. nº " + txtOs.getText() + ".</html>",
+                "A T E N Ç Ã O", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                ps = conn.prepareStatement(
+                        "delete from ordemservico where id = ?"
+                );
+                ps.setString(1, txtOs.getText());
+                ps.executeUpdate();
+                clean();
+                JOptionPane.showMessageDialog(null,
+                        "Ordem de Serviço nº '" + txtOs.getText() + "' excluida."
+                );
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro em exclusão da O.S.\n." + e);
+            }
         }
     }
 
@@ -459,6 +483,11 @@ public class OsFrame extends javax.swing.JInternalFrame {
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         btnDelete.setToolTipText("Excluir");
         btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/print_small.png"))); // NOI18N
         btnPrint.setToolTipText("Ordem de Serviço");
@@ -490,59 +519,58 @@ public class OsFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnClean)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtServico)
-                            .addComponent(txtEquipamento)
-                            .addComponent(txtDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnClean)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtValor))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(67, 67, 67)
-                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtServico)
+                                    .addComponent(txtEquipamento)
+                                    .addComponent(txtDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(85, 85, 85)
+                                    .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtValor))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(67, 67, 67)
+                                    .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,12 +659,6 @@ public class OsFrame extends javax.swing.JInternalFrame {
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
         clean();
-        txtOs.setText(null);
-        txtData.setText(null);
-        rbOrcamento.setSelected(true);
-        btnCreate.setEnabled(true);
-        txtNomeCliente.setEditable(true);
-        jTabCli.setVisible(true);
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkActionPerformed
@@ -650,6 +672,10 @@ public class OsFrame extends javax.swing.JInternalFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         update();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
