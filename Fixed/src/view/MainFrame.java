@@ -3,14 +3,23 @@ package view;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import dao.Conexao;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * * @author Sérgio Felipe Starke
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    Connection conn = null;
+
     public MainFrame() {
         initComponents();
+        conn = Conexao.connection();
     }
 
     @SuppressWarnings("unchecked")
@@ -120,6 +129,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         mniRelCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         mniRelCli.setText("Clientes");
+        mniRelCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRelCliActionPerformed(evt);
+            }
+        });
         mnRelatorio.add(mniRelCli);
 
         mniRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
@@ -209,6 +223,20 @@ public class MainFrame extends javax.swing.JFrame {
         os.setVisible(true);
         jDesktop.add(os);
     }//GEN-LAST:event_mniOsActionPerformed
+
+    private void mniRelCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelCliActionPerformed
+        //Relatório Cliente. Implementação da Classe Jasper"iReport"
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(
+                    "S:/Documentos/iReport/Fixed/Cliente.jasper", null, conn
+            );
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(
+                    null, "Falha em apresentar o relatório de Clientes.\n" + e
+            );
+        }
+    }//GEN-LAST:event_mniRelCliActionPerformed
 
     /**
      * @param args the command line arguments

@@ -636,7 +636,6 @@ this.linkos += "\n OS nº: " + rs.getString(1) + ". Cliente: " + rs.getString(2)
 
     private void jTabCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabCliMouseClicked
         setTxtField();
-
     }//GEN-LAST:event_jTabCliMouseClicked
 
     private void rbOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOrcamentoActionPerformed
