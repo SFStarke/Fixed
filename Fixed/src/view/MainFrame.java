@@ -138,6 +138,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         mniRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         mniRelServ.setText("Serviços");
+        mniRelServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRelServActionPerformed(evt);
+            }
+        });
         mnRelatorio.add(mniRelServ);
 
         MenuBar.add(mnRelatorio);
@@ -227,16 +232,31 @@ public class MainFrame extends javax.swing.JFrame {
     private void mniRelCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelCliActionPerformed
         //Relatório Cliente. Implementação da Classe Jasper"iReport"
         try {
-            JasperPrint jp = JasperFillManager.fillReport(
+            JasperPrint jasperprint = JasperFillManager.fillReport(
                     "S:/Documentos/iReport/Fixed/Cliente.jasper", null, conn
             );
-            JasperViewer.viewReport(jp, false);
+            JasperViewer.viewReport(jasperprint, false);
         } catch (JRException e) {
             JOptionPane.showMessageDialog(
                     null, "Falha em apresentar o relatório de Clientes.\n" + e
             );
         }
     }//GEN-LAST:event_mniRelCliActionPerformed
+
+    private void mniRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelServActionPerformed
+        //Relatório de Serviço. Implementação da Classe Jasper"iReport"
+        try {
+           JasperPrint jasperprint = JasperFillManager.fillReport(
+                   "S:/Documentos/iReport/Fixed/Servico.jasper", null, conn
+           );
+           JasperViewer.viewReport(jasperprint,false);
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(
+                    null, "Falha em apresentar o relatório de Serviços.\n" + e
+            );
+        }
+        
+    }//GEN-LAST:event_mniRelServActionPerformed
 
     /**
      * @param args the command line arguments

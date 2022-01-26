@@ -43,22 +43,6 @@ public class OsFrame extends javax.swing.JInternalFrame {
         btnCreate.setEnabled(true);
     }
 
-    private void link() {
-        try {
-            ps = conn.prepareStatement(
-"select o.id, c.nome from ordemservico o join clientes c on o.idcliente = c.id order by id;"
-            );
-            rs = ps.executeQuery();
-            while (rs.next()) {
-this.linkos += "\n OS nº: " + rs.getString(1) + ". Cliente: " + rs.getString(2) + ".";
-            }
-            JOptionPane.showMessageDialog(null, linkos);
-            this.linkos = "";
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha em Link.\n" + e);
-        }
-    }
-
     private void searchcli() {//Método de pesquisa objetiva. "pelo nome".
         try {
             ps = conn.prepareStatement(
@@ -661,7 +645,8 @@ this.linkos += "\n OS nº: " + rs.getString(1) + ". Cliente: " + rs.getString(2)
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkActionPerformed
-        link();
+       LinkOs link = new LinkOs();
+        link.setVisible(true);
     }//GEN-LAST:event_btnLinkActionPerformed
 
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
