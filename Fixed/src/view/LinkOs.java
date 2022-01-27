@@ -23,22 +23,24 @@ public class LinkOs extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         search();
     }
-    
-    private void search(){//Método para listar nº O.S e Cliente.
+
+    private void search() {//Método para listar nº O.S e Cliente.
         try {
             ps = conn.prepareStatement(
-"select o.id, c.nome from ordemservico o join clientes c on o.idcliente = c.id order by id;"
+                    "select o.id, c.nome from ordemservico o join clientes c"
+                    + "on o.idcliente = c.id where c.nome like ? order by o.id;"
             );
+            ps.setString(1, txtSearch.getText() + "%");
             rs = ps.executeQuery();
-            
-((DefaultTableModel)jTable.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
-       //Apresenta conteudo de pesquisa em jTable
-       while(rs.next()){             
-           table.insertRow(table.getRowCount(), new Object[]{rs.getString(1),
- rs.getString(2)});
-        }
+//Limpa jTable para preenchimento atualizado.
+            ((DefaultTableModel) jTable.getModel()).setRowCount(0);
+//Apresenta conteudo de pesquisa em jTable
+            while (rs.next()) {
+                table.insertRow(table.getRowCount(), new Object[]{rs.getString(1),
+                    rs.getString(2)});
+            }
         } catch (SQLException e) {
- JOptionPane.showMessageDialog(null, "Erro em Link O.S.\n"+e);           
+            JOptionPane.showMessageDialog(null, "Erro em Link O.S.\n" + e);
         }
     }
 
@@ -48,9 +50,12 @@ public class LinkOs extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        btnRead = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Link para consulta de nº O.S.");
+        setTitle("Link nº O.S & Nome de Cliente");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -93,25 +98,55 @@ public class LinkOs extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable);
 
+        btnRead.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        btnRead.setText("Recarregar lista");
+        btnRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRead, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRead)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        txtSearch.setText(null);
+        search();
+    }//GEN-LAST:event_btnReadActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+// Botão Função Mouse em txtSearch / Eventos / Keys / KeyReleased.        
+        search();
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments
@@ -149,7 +184,9 @@ public class LinkOs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRead;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
