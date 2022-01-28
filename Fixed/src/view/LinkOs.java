@@ -27,8 +27,7 @@ public class LinkOs extends javax.swing.JFrame {
     private void search() {//Método para listar nº O.S e Cliente.
         try {
             ps = conn.prepareStatement(
-                    "select o.id, c.nome from ordemservico o join clientes c"
-                    + "on o.idcliente = c.id where c.nome like ? order by o.id;"
+ "select o.id, c.nome from ordemservico o join clientes c on o.idcliente = c.id where c.nome like ? order by o.id;"
             );
             ps.setString(1, txtSearch.getText() + "%");
             rs = ps.executeQuery();
@@ -96,6 +95,7 @@ public class LinkOs extends javax.swing.JFrame {
                 "Nº O.S", "Cliente"
             }
         ));
+        jTable.setEnabled(false);
         jScrollPane1.setViewportView(jTable);
 
         btnRead.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N

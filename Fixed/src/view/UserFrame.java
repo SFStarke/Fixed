@@ -19,6 +19,8 @@ public class UserFrame extends javax.swing.JInternalFrame {
         initComponents();
         conn = Conexao.connection();
         table = (DefaultTableModel) jTable.getModel();
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
         showTable();
     }
 
@@ -55,6 +57,8 @@ public class UserFrame extends javax.swing.JInternalFrame {
         txtFone.setText(null);
         cbAcesso.setSelectedIndex(0);
         btnCreate.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
 
     private void read() {
@@ -71,8 +75,8 @@ public class UserFrame extends javax.swing.JInternalFrame {
                 cbAcesso.setSelectedItem(rs.getString(6));
                 txtFone.setText(rs.getString("fone"));
             } else {
-  JOptionPane.showMessageDialog(null, "<html><strong>Usuário</strong> ID nº [ "
-       + txtId.getText() + " ]<br><strong>não cadastrado</strong></html>.");
+  JOptionPane.showMessageDialog(null, "<html><strong>Usuário(a)</strong> ID nº [ "
+       + txtId.getText() + " ]<br><strong>não cadastrado(a)</strong></html>.");
                 clean();
             }
 
@@ -126,7 +130,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
                 ps.executeUpdate();
                 clean();
                 showTable();
-                JOptionPane.showMessageDialog(null, "Usuário Atualizado.");
+                JOptionPane.showMessageDialog(null, "Usuário(a) Atualizado(a).");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Conflito ao Atualizar:\n" + e);
@@ -148,7 +152,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
                 ps.executeUpdate();
                 showTable();
                 clean();
-                JOptionPane.showMessageDialog(null, "Usuário Excluido.");
+                JOptionPane.showMessageDialog(null, "Usuário(a) Excluido.");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Conflito ao Excluir:\n" + e);
             }
@@ -179,6 +183,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -188,7 +193,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(792, 452));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html><strong><font size=6>*</strong> Campos Obrigatórios</html>");
 
@@ -308,6 +313,10 @@ public class UserFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable);
 
+        jLabel8.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel8.setText("<html>U<br>S</html>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,6 +324,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -355,21 +365,22 @@ public class UserFrame extends javax.swing.JInternalFrame {
                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72)
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(btnClean)
@@ -402,14 +413,19 @@ public class UserFrame extends javax.swing.JInternalFrame {
                             .addComponent(btnCreate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelete)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
-        setBounds(0, 0, 792, 452);
+        setBounds(0, 0, 830, 452);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -436,7 +452,8 @@ public class UserFrame extends javax.swing.JInternalFrame {
         setTxtId();
         read();
         btnCreate.setEnabled(false);
-
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
     }//GEN-LAST:event_jTableMouseClicked
 
 
@@ -453,6 +470,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
