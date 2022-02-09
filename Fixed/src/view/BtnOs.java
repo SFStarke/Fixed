@@ -15,7 +15,6 @@ public class BtnOs extends javax.swing.JFrame {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    OsFrame osframe = new OsFrame();
 
     public BtnOs() {
         initComponents();

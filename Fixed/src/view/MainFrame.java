@@ -249,8 +249,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniRelCliActionPerformed
 
     private void mniRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelServActionPerformed
-        //Relatório de Serviço. Implementação da Classe Jasper"iReport"
-         int r = JOptionPane.showConfirmDialog(null,
+//Relatório de Serviços. Implementação da Classe Jasper"iReport"ce ou para simples conferência atravéz da classe RalatorioServico.
+        RelatorioServico relatorioservico = new RelatorioServico();
+        
+        int r = JOptionPane.showConfirmDialog(null,
  "[ Sim ]\n Para imprimir Relatório de Serviço\n[ Não ]\nPara simples consulta");
         if (r == 0){
             try {
@@ -264,9 +266,8 @@ public class MainFrame extends javax.swing.JFrame {
             );
         }  
         }else if(r == 1){
-            JOptionPane.showMessageDialog(null, "Simples Conferência");
+            relatorioservico.setVisible(true);
         }
-        
     }//GEN-LAST:event_mniRelServActionPerformed
 
     /**
