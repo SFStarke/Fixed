@@ -125,10 +125,14 @@ public class MainFrame extends javax.swing.JFrame {
         MenuBar.add(mnCadastro);
 
         mnRelatorio.setText("Relatório");
+        mnRelatorio.setToolTipText("Para imprimir relatórios");
+        mnRelatorio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mnRelatorio.setEnabled(false);
 
         mniRelCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         mniRelCli.setText("Clientes");
+        mniRelCli.setToolTipText("Imprimir");
+        mniRelCli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mniRelCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniRelCliActionPerformed(evt);
@@ -138,6 +142,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         mniRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         mniRelServ.setText("Serviços");
+        mniRelServ.setToolTipText("Imprimir e ou consulta");
+        mniRelServ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mniRelServ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniRelServActionPerformed(evt);
@@ -196,13 +202,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void mniSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSairActionPerformed
 //Método que exibe confirmação para encerramento"Fechar" o Sistema.        
         int sair = JOptionPane.showConfirmDialog(
-                null, "Tem certeza que deseja sair?", "ATENÇÃO", JOptionPane.YES_NO_OPTION
+      null, "Tem certeza que deseja sair?", "ATENÇÃO", JOptionPane.YES_NO_OPTION
         );
 
         if (sair == JOptionPane.YES_OPTION) {
             System.exit(sair);
         }
-        System.out.println(sair);
     }//GEN-LAST:event_mniSairActionPerformed
 
     private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
@@ -245,7 +250,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void mniRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRelServActionPerformed
         //Relatório de Serviço. Implementação da Classe Jasper"iReport"
-        try {
+         int r = JOptionPane.showConfirmDialog(null,
+ "[ Sim ]\n Para imprimir Relatório de Serviço\n[ Não ]\nPara simples consulta");
+        if (r == 0){
+            try {
            JasperPrint jasperprint = JasperFillManager.fillReport(
                    "S:/Documentos/iReport/Fixed/Servico.jasper", null, conn
            );
@@ -254,6 +262,9 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(
                     null, "Falha em apresentar o relatório de Serviços.\n" + e
             );
+        }  
+        }else if(r == 1){
+            JOptionPane.showMessageDialog(null, "Simples Conferência");
         }
         
     }//GEN-LAST:event_mniRelServActionPerformed

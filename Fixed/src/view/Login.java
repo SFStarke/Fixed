@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
     ResultSet rs = null;
 
     public void acessar() {
-        MainFrame mf = new MainFrame();//Torna JFrame"MainFrame" visivel.
+        MainFrame mainframe = new MainFrame();//Instância do objeto JFrame"MainFrame".
 
         try {
             ps = conn.prepareStatement(
@@ -32,7 +32,7 @@ public class Login extends javax.swing.JFrame {
                 String acesso = rs.getString(6);
 //Condicional [livre ou restrito] Consulta D.B/fixed/usuarios/acesso...
                 if (acesso.equals("livre")) {
-                    mf.setVisible(true);
+                    mainframe.setVisible(true);
                     MainFrame.mniUsuario.setEnabled(true);
                     MainFrame.mnRelatorio.setEnabled(true);
                     MainFrame.lblUsuario.setText(
@@ -40,7 +40,7 @@ public class Login extends javax.swing.JFrame {
 "Usuário com acesso <strong><font color=green>" + rs.getString(6)+"</font color>.</html>"
                     );
                 } else {
-                    mf.setVisible(true);
+                    mainframe.setVisible(true);
                     MainFrame.lblUsuario.setText(
 "<html><font size=5><font color=orange>"+rs.getString(2)+"</font color></font size>.<br>"+
    "Usuário com acesso <strong><font color=orange>" + rs.getString(6)+"</font color>.</html>"
@@ -69,6 +69,9 @@ public class Login extends javax.swing.JFrame {
             lblStatus.setText("<html>Status da Conexão:<br><strong><font color= red>"
                     + "Indisponível</strong>.</html>");
             btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Conn.Fail.png")));
+            txtLogin.setEnabled(false);
+            pwdSenha.setEnabled(false);
+            btnOk.setEnabled(false);
         }
     }
 

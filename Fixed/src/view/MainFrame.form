@@ -54,6 +54,10 @@
         <Menu class="javax.swing.JMenu" name="mnRelatorio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Para imprimir relat&#xf3;rios"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor em Forma de M&#xe3;o"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
@@ -66,6 +70,10 @@
                   <KeyStroke key="Alt+R"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
+                <Property name="toolTipText" type="java.lang.String" value="Imprimir"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniRelCliActionPerformed"/>
@@ -77,6 +85,10 @@
                   <KeyStroke key="Alt+S"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
+                <Property name="toolTipText" type="java.lang.String" value="Imprimir e ou consulta"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniRelServActionPerformed"/>
