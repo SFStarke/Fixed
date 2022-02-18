@@ -222,7 +222,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
 
         btnClean.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
         btnClean.setText("Limpar campos");
-        btnClean.setToolTipText("Para adicionar novo usuário.");
+        btnClean.setToolTipText("Para restaurar a interface");
         btnClean.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnClean.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnClean.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +356,7 @@ public class UserFrame extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnClean))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(100, 100, 100)

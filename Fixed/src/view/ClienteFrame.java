@@ -34,7 +34,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
             ps.setString(1, txtNome.getText()+"%");
             rs = ps.executeQuery();
             
-        ((DefaultTableModel)jTable.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
+((DefaultTableModel)jTable.getModel()).setRowCount(0);//Limpa jTable para preenchimento atualizado.
        //Apresenta conteudo de pesquisa em jTable
        while(rs.next()){             
            table.insertRow(table.getRowCount(), new Object[]{rs.getString(1),
@@ -78,7 +78,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
             ps.setString(4, txtEmail.getText());
 
             if ((txtNome.getText().isEmpty()) || (txtFone.getText().isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+  JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios.");
             } else {
                 ps.executeUpdate();
                 search();
@@ -117,7 +117,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
 //Condicional questionativo de confirmação.
           if(!"".equals(txtId.getText())){
             int confirm = JOptionPane.showConfirmDialog(null,
-                    "<html><strong>Excluir Cliente?<br></strong>"+txtNome.getText()+"</html>","A T E N Ç Â O",
+ "<html><strong>Excluir Cliente?<br></strong>"+txtNome.getText()+"</html>","A T E N Ç Â O",
                     JOptionPane.YES_NO_OPTION);
             if(confirm == JOptionPane.YES_OPTION){
                 try {
@@ -135,7 +135,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
                 }
             }
           }else{
-              JOptionPane.showMessageDialog(null, "Selecione um Cliente para ser excluido(a).");
+  JOptionPane.showMessageDialog(null, "Selecione um Cliente para ser excluido(a).");
           }  
     }
 
@@ -291,9 +291,11 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnClean.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
         btnClean.setText("Limpar Campos");
-        btnClean.setToolTipText("Para adicionar novo cliente.");
+        btnClean.setToolTipText("Para restaurar interface.");
         btnClean.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClean.setPreferredSize(new java.awt.Dimension(101, 26));
         btnClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCleanActionPerformed(evt);
@@ -341,7 +343,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(btnClean)
+                                    .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(112, 112, 112)
@@ -390,7 +392,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
                                 .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnDelete))
-                            .addComponent(btnClean))
+                            .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
                 .addContainerGap())

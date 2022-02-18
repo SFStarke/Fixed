@@ -106,6 +106,8 @@ public class LinkOs extends javax.swing.JFrame {
             }
         });
 
+        txtSearch.setToolTipText("Nome do Cliente");
+        txtSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
