@@ -1,4 +1,3 @@
-# Fixed
 # Sistema para cadastro de: Clientes, Usuários e Ordem de Serviços
 ---
 ## Declarações do Desenvolvedor
