@@ -123,6 +123,7 @@ rs.getString("equipamento"),rs.getString("valor"),rs.getString("nome"),rs.getStr
             }
         ));
         jTable.setEnabled(false);
+        jTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -9,7 +9,7 @@ Particularmente, tomo este como alto grau de dificuldade, contudo, o escolhi par
 O Software foi desenvolvido em Java com a IDE NetBeans. Para gerar Relatórios, uso a ferramenta iReport da framework JasperReports. Na persistência de dados, MYSQL.
 Este projeto foi baseado nas aulas do youtuber José de Assis [Link das aulas](https://www.youtube.com/watch?v=eA4WjjkzK3c&list=PLbEOwbQR9lqxsTusvu8wfkUECrmcV81MU), entretanto, implementei upgrades quanto a sua funcionalidade e intuitividade.
 
-Neste repositório há em anexo, o “Guia de Uso” para um panorama do funcionamento operacional do sistema, o dump do seu banco de dados e o backup do iReport.
+Neste repositório há em anexo, o **Guia de Uso** para um panorama do funcionamento operacional do sistema e os backups: banco de dados "**dump**" e do "**iReport**".
 
 ## Propósito do Sistema
 
