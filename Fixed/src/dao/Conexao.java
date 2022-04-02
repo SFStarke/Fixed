@@ -4,6 +4,8 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
+ * Classe com método para conecção de Drive e localhost mys1ql.
+ * Este método será "chamado" em outras classes para uso efetivo de seu banco de dados.
  * @author Sérgio Felipe Starke
  */ 
 public class Conexao {

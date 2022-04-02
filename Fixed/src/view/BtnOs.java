@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ *Classe criada no propósito para apresentar OS em caso de problemas no uso do iReport.
+ *Sua apresentação se dá através do acionamento do botão O.S da classe OsFrame.
  *
  * @author Sérgio Felipe Starke
  */

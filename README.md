@@ -6,7 +6,8 @@ O projeto não tem propósito no uso “profissional”, entretanto didático, p
 
 Particularmente, tomo este como alto grau de dificuldade, contudo, o escolhi para primeiro projeto no repositório do GitHub, por entender que no dia a dia do desenvolvedor, sempre que possível é apropriado superar seus limites, agregando assim mais experiência e conhecimento.
 
-O Software foi desenvolvido em Java com a IDE NetBeans. Para gerar Relatórios, uso a ferramenta iReport da framework JasperReports. Na persistência de dados, MYSQL.
+O Software foi desenvolvido em Java com a IDE NetBeans. Para gerar Relatórios, uso a ferramenta iReport da framework JasperReports. Na persistência de dados, através da ferramenta de pacotes de servidores XAMPP, uso o MYSQL MariaDB.
+
 Este projeto foi baseado nas aulas do youtuber José de Assis [Link das aulas](https://www.youtube.com/watch?v=eA4WjjkzK3c&list=PLbEOwbQR9lqxsTusvu8wfkUECrmcV81MU), entretanto, implementei upgrades quanto a sua funcionalidade e intuitividade.
 
 Neste repositório há em anexo, o **Guia de Uso** para um panorama do funcionamento operacional do sistema e os backups: banco de dados "**dump**" e do "**iReport**".
@@ -20,7 +21,7 @@ Neste repositório há em anexo, o **Guia de Uso** para um panorama do funcionam
 ## Requisitos necessários para o sistema
 
 * Java JRE “Java Runtime Environment” ou Java JDK “Java Development Kit” (v.8.2).
-* Persistência de dados.
+* Persistência de dados "MySQL MariaDB".
 * Framework Jasper iReport (v.5.6.0.).
 
 ---
