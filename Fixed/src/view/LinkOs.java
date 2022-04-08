@@ -20,7 +20,7 @@ public class LinkOs extends javax.swing.JFrame {
         initComponents();
         conn = Conexao.connection();
         table = (DefaultTableModel) jTable.getModel();
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
         search();
     }
 

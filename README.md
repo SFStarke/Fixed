@@ -10,7 +10,10 @@ O Software foi desenvolvido em Java com a IDE NetBeans. Para gerar Relatórios, 
 
 Este projeto foi baseado nas aulas do youtuber José de Assis [Link das aulas](https://www.youtube.com/watch?v=eA4WjjkzK3c&list=PLbEOwbQR9lqxsTusvu8wfkUECrmcV81MU), entretanto, implementei upgrades quanto a sua funcionalidade e intuitividade.
 
-Neste repositório há em anexo, o **Guia de Uso** para um panorama do funcionamento operacional do sistema e os backups: banco de dados "**dump**" e do "**iReport**".
+Neste repositório há em anexo;
+* **Video_DemoFixed** Arquivo de video mp4 demonstrativo do sistema.
+* **Guia de Uso** Arquivo em pdf para um panorama do funcionamento operacional.
+* Backups: banco de dados "**dump**" e do "**iReport**".
 
 ## Propósito do Sistema
 
