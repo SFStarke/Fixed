@@ -46,7 +46,7 @@ public class ClienteFrame extends javax.swing.JInternalFrame {
     }
     
     private void setTxtFields(){//Preenchimento dos campos txt. pela seleção do jTable
-        int spot = jTable.getSelectedRow();//Estabelece posição"valor" do cliente delecionado.
+        int spot = jTable.getSelectedRow();//Estabelece posição"valor" do cliente selecionado.
         txtId.setText(jTable.getModel().getValueAt(spot, 0).toString());
         txtNome.setText(jTable.getModel().getValueAt(spot, 1).toString());
         txtLogradouro.setText(jTable.getModel().getValueAt(spot, 2).toString());

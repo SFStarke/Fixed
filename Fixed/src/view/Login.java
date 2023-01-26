@@ -24,8 +24,8 @@ public class Login extends javax.swing.JFrame {
                     "select* from usuarios where login= ? and senha= ?;"
             );
             ps.setString(1, txtLogin.getText());
-            String senha = new String(pwdSenha.getPassword());
-            ps.setString(2, senha);
+            String senha = new String(pwdSenha.getPassword());//Recupera um caractere por vez.
+            ps.setString(2, senha); // Nivel de segurança maior.
             rs = ps.executeQuery();
 //Condicional de Compatibilidade e Permição de acesso.
             if (rs.next()) {

@@ -194,9 +194,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 //Método que gera data corrente, ao abrir MainFrame. 
+//bfm. Em area livre de MainFrame: Eventos/Window/windowActivated.
         Date date = new Date();
-        DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT);
-        lblData.setText(format.format(date));
+        DateFormat formate = DateFormat.getDateInstance(DateFormat.SHORT);
+        lblData.setText(formate.format(date));
     }//GEN-LAST:event_formWindowActivated
 
     private void mniSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSairActionPerformed
@@ -206,13 +207,15 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         if (sair == JOptionPane.YES_OPTION) {
-            System.exit(sair);
+            System.exit(0);
         }
     }//GEN-LAST:event_mniSairActionPerformed
 
     private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
         Sobre sobre = new Sobre();
         sobre.setVisible(true);
+        /* Quando fechar "Frame Sobre", para evitar encerramento total do Sistema:
+         * Propriedades/defaultCloseOperation => DISPOSE */
     }//GEN-LAST:event_mniSobreActionPerformed
 
     private void mnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastroActionPerformed
