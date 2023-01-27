@@ -79,7 +79,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
     }
 
     private void setTxtField() {//Preenchimento dos campos txt. pela seleção do jTable
-        int spot = jTabCli.getSelectedRow();//Estabelece posição"valor" do cliente delecionado.
+        int spot = jTabCli.getSelectedRow();//Estabelece posição"valor" do cliente selecionado.
         txtIdCliente.setText(jTabCli.getModel().getValueAt(spot, 0).toString());
     }
 
@@ -211,7 +211,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
         } else {//Relatório O.S. "iReport"
             try {//Criar Objeto da Classe HashMap. "Biblioteca iReport"
                 HashMap hashmap = new HashMap();//Função Filtro
-                hashmap.put("id", Integer.parseInt(txtOs.getText()));//"id" O mesmo que foi implementado em iReport
+                hashmap.put("id", Integer.parseInt(txtOs.getText()));//"id" do "New parameter" em iReport
                 JasperPrint print = JasperFillManager.fillReport(
                 "S:/Documentos/iReport/Fixed/Ordem de Serviço.jasper", hashmap, conn
                 );
@@ -677,7 +677,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -710,6 +710,7 @@ public class OsFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeClienteKeyReleased
 
     private void jTabCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabCliMouseClicked
+        //Transfere ID para campo: *bfm Eventos/Mouse/mouseClicked
         setTxtField();
     }//GEN-LAST:event_jTabCliMouseClicked
 
@@ -722,7 +723,8 @@ public class OsFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rbOrdemServicoActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        //Método que á exemplo do Construtor, inicia com rbOrcamento acionado.
+        /*Função semelhante ao Construtor, inicia com rbOrcamento acionado.
+         *Selecione area vasia da view da OS: *bfm Eventos/InternalFrame/internalFrameOpened*/
         rbOrcamento.setSelected(true);
         tipo = "Orçamento";
     }//GEN-LAST:event_formInternalFrameOpened

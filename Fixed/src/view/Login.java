@@ -32,6 +32,8 @@ public class Login extends javax.swing.JFrame {
                 String acesso = rs.getString(6);
 //Condicional [livre ou restrito] Consulta D.B/fixed/usuarios/acesso...
                 if (acesso.equals("livre")) {
+/*Embora esteja na 'Frame Login', obtenho permição para manipulação de métodos da 'MainFrame:
+ *ex; [ lblUsuario MainFrame ] *bfm Propriedades/Código/Modificadores de Variáveis => Publico e Estático*/                 
                     mainframe.setVisible(true);
                     MainFrame.mniUsuario.setEnabled(true);
                     MainFrame.mnRelatorio.setEnabled(true);

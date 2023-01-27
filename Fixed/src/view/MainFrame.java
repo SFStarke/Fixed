@@ -188,8 +188,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void mniUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuarioActionPerformed
 //Sintaxe de abertura da InternalFrema correspondente para jDesktop.        
         UserFrame uf = new UserFrame();
-        uf.setVisible(true);
-        jDesktop.add(uf);
+        uf.setVisible(true);//Ao clicar menu, abre: Forms GUI Swing/Form JInternal Frame
+        jDesktop.add(uf);//Permite que Form JInternal Frame 'UserFrame' seja adicionada em jDesktop
     }//GEN-LAST:event_mniUsuarioActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -259,10 +259,10 @@ public class MainFrame extends javax.swing.JFrame {
  "[ Sim ]\n Para imprimir Relatório de Serviço\n[ Não ]\nPara simples consulta");
         if (r == 0){
             try {
-           JasperPrint jasperprint = JasperFillManager.fillReport(
+           JasperPrint mostrarJasper = JasperFillManager.fillReport(
                    "S:/Documentos/iReport/Fixed/Servico.jasper", null, conn
            );
-           JasperViewer.viewReport(jasperprint,false);
+           JasperViewer.viewReport(mostrarJasper,false);
         } catch (JRException e) {
             JOptionPane.showMessageDialog(
                     null, "Falha em apresentar o relatório de Serviços.\n" + e
